@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block body %}
+
+    <div class="rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 px-3 py-10 bg-gray-200 flex justify-center">
+
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <div>
+            {{ form_start(registrationForm) }}
+            {% form_theme registrationForm 'form_template.html.twig' %}
+            <div class="bg-white shadow-md rounded px-28 pt-6 pb-8 mb-4">
+                <div class="text-center text-blue-700 font-bold text-2xl mb-2">
+                    <h1>Inscription</h1>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-blue-700 font-bold mb-2" for="username">
+                        Email
+                    </label>
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                <div class="mb-4">
+                    <label class="block text-blue-700 font-bold mb-2" for="username">
+                        Nom d'utilisateur
+                    </label>
+                    {{ form_row(registrationForm.username) }}
+                </div>
+                <div class="mb-6">
+                    <label class="block text-blue-700 font-bold mb-2" for="password">
+                        Mot de passe
+                    </label>
+                    {{ form_row(registrationForm.plainPassword) }}
+                </div>
+                <div class="flex items-center justify-between">
+                    <label class="text-gray-700 text-sm font-bold">
+                        Accepter les termes :  {{ form_widget(registrationForm.agreeTerms) }}
+                    </label>
+                    <button class="block text-md px-4  ml-2 py-2 rounded text-blue-700 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0" type="submit">
+                        S'inscrire
+                    </button>
+                </div>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

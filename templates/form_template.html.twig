@@ -1,0 +1,21 @@
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    {%- if type == 'range' or type == 'color' -%}
+        {# Attribute "required" is not supported #}
+        {%- set required = false -%}
+    {%- endif -%}
+    <input type="{{ type }}"
+           class="appearance-none block w-full mb-2 px-3 py-2 border border-gray-300 rounded-md placeholder-gray-700 focus:outline-none
+           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black"
+            {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock form_widget_simple -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-1 text-sm">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
