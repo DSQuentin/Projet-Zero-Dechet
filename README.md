@@ -17,11 +17,17 @@ relation des personnes souhaitant se débarrasser de ce qui les encombres ou don
 n'ont plus besoin. Les utilisateurs peuvent alors effectué des échanges gratuitement.
 
 ## Comment démarrer le projet ?
-Pour démarrer le projet sur votre machine, il vous suffit de récupérer les fichiers.
+Notre projet fonctionne avec Composer qui est un logiciel de dépendance libre écrit en PHP.
+Il permet notamment de déclarer et d'installer des bibliothèques dont le projet à besoin.
+Il faut donc l'installer pour que le projet fonctionne.
+Vous trouverez dans ce lien : https://getcomposer.org/doc/00-intro.md la démarche à suivre pour l'installer.
+
+Puis, pour démarrer le projet sur votre machine, il vous suffit de récupérer les fichiers.
 Ensuite, il faut récupérer les fichiers composés. Pour cela, dans un terminal dans le dossier du projet, on exécute la commande suivante :
 * composer install 
 
-Il faut maintenant créer la base de données et y injecter les données. Tout d'abord, il faut modifier les informations de connexions à MySQL. Dans le fichier .env, il faut modifier la ligne DATABASE_URL=mysql://root:root@127.0.0.1:3306/trainingauth. Le premier root correspond au nom d'utilisateur, le second au mot de passe. Ensuite on peut changer le nom de la base de données, ici le nom est trainingauth.
+Il faut maintenant créer la base de données et y injecter les données. Tout d'abord, il faut modifier les informations de connexions à MySQL. Dans le fichier .env, il faut modifier la ligne DATABASE_URL=mysql://root:root@127.0.0.1:3306/database. Le premier root correspond au nom d'utilisateur, le second au mot de passe. 
+Ensuite on peut donne un nom a notre base de données a la place de "database".
 Enfin, on exécute les commandes suivantes :
 * php bin/console doctrine:database:create
 * php bin/console doctrine:fixtures:load
