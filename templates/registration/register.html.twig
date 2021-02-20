@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 px-3 py-10 bg-gray-200 flex justify-center">
+    <div class="rounded-t-lg overflow-hidden px-3 py-10 bg-gray-200 flex justify-center">
 
         {% for flashError in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flashError }}</div>

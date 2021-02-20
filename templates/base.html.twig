@@ -6,58 +6,50 @@
         <link rel="stylesheet" href="/output.css">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body class="bg-gray-200 h-screen">
-    <nav class="flex items-center justify-between flex-wrap bg-gray-200 py-4 lg:px-12 shadow border-solid border-t-2 border-blue-700">
-        <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
-            <div class="flex items-center flex-shrink-0 text-gray-800 mr-8">
-                <span class="font-semibold text-xl tracking-tight">Zéro Déchets</span>
-            </div>
-            <div class="block lg:hidden ">
-                <button id="nav" class="flex items-center px-3 py-2 border-2 rounded text-blue-700 border-blue-700 hover:text-blue-700 hover:border-blue-700">
-                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+    <body class="bg-gray-200 h-screen flex flex-col">
+    <!-- component -->
+    <header>
+        <nav id="header" class="w-full z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400 mb-4">
+            <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
+                <label for="menu-toggle" class="cursor-pointer md:hidden block">
+                    <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                        <title>menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                     </svg>
-                </button>
+                </label>
+                <input class="hidden" type="checkbox" id="menu-toggle">
+
+                <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
+                    <nav>
+                        <ul class="md:flex items-center justify-between text-base pt-4 md:pt-0">
+                            <li class="inline-block text-gray-800 no-underline font-medium text-xl py-2 px-4 lg:-ml-2">Zéro Déchet</li>
+                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('home') }}">Accueil</a></li>
+                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('list_annonce') }}">Annonces</a></li>
+                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('annonces_index') }}">Gérer</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
+                    <div class="auth flex items-center w-full md:w-full">
+                        {% if app.user %}
+                            <a href="{{ path('profile') }}" class="bg-transparent text-blue-600 font-medium text-lg p-2 rounded border-gray-300 mr-4 hover:text-gray-800">Profile</a>
+                            <a href="{{ path('app_logout') }}" class="bg-red-500 text-gray-200  p-2 rounded  hover:bg-red-600 hover:text-white">Deconnexion</a>
+                        {% else %}
+                            <a href="{{ path('app_register') }}" class="bg-transparent text-blue-600 font-medium text-lg p-2 rounded border-gray-300 mr-4 hover:text-gray-800">S'inscrire</a>
+                            <a href="{{ path('app_login') }}" class="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-white">Se connecter</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
+        </nav>
+    </header>
+
+        <div class="flex-grow">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
         </div>
 
-        <div class="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
-            <div class="text-md font-bold text-blue-700 lg:flex-grow">
-                <a href="{{ path("home") }}"
-                   class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
-                    Accueil
-                </a>
-                <a href="{{ path("list_annonce") }}"
-                   class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
-                    Annonces
-                </a>
-                <a href="{{ path("annonces_index") }}"
-                   class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
-                    Gérer
-                </a>
-            </div>
-
-            <div class="flex ">
-                {%  if app.user %}
-                    <a href="{{ path('profile') }}"
-                       class="block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">Profil
-                    </a>
-                    <a href="{{ path('app_logout') }}"
-                       class="block text-md px-4 py-2 rounded text-red-700 ml-2 font-bold hover:text-white mt-4 hover:bg-red-700 lg:mt-0">Déconnexion
-                    </a>
-                {% else %}
-                <a href="{{ path('app_login') }}"
-                   class="block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">Se connecter
-                    </a>
-
-                <a href="{{ path('app_register') }}"
-                   class=" block text-md px-4  ml-2 py-2 rounded text-blue-700 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">S'inscrire</a>
-                {% endif %}
-            </div>
-        </div>
-
-    </nav>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% include '_footer.html.twig' %}
     </body>
 </html>
