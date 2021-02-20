@@ -19,6 +19,16 @@ class AnnoncesRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonces::class);
     }
 
+    public function findThreeLastEntity()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.created_at', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Annonces[] Returns an array of Annonces objects
     //  */

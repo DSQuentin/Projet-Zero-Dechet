@@ -89,4 +89,16 @@ class Annonces
 
         return $this;
     }
+
+    public function getMediumResumeContent(): string
+    {
+        $content = $this->getContent();
+        return substr($content, 0, 200) . ' ...';
+    }
+
+    public function getShortResumeContent(): string
+    {
+        $content = $this->getContent();
+        return substr($content, 0, 50) . ' ...';
+    }
 }

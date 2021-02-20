@@ -2,25 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Annonces;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnnoncesType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
+            ->add('username')
+            ->add('email')
+            ->add('password')
+            ->add('profile_pic')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Annonces::class,
+            'data_class' => User::class,
         ]);
     }
 }

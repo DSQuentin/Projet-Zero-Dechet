@@ -1,0 +1,35 @@
+{# tailwindcss Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+    <div class="inline-block flex">
+        <div class="mx-1 px-3 py-2 bg-white text-gray-500 rounded-lg">
+            {% if first is defined and current != first %}
+                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                        Précédent
+                    </span>
+                </a>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+                        <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                            {{ page }}
+                        </span>
+                    </a>
+                {% else %}
+                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold">{{ page }}</span>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+
+                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                        Suivant
+                    </span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

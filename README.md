@@ -2,7 +2,7 @@
 Ce projet est un projet de site web de fin de deuxième année de notre DUT Informatique.
 
 ## Participants
-Pour ce projet, nous sommes en groupe de 6 composé de :  
+Pour ce projet, nous sommes en groupe de 5 composé de :  
 Malo Miquel (Chef de projet)  
 Quentin Da Silva  
 Dariusz Nowakowski  

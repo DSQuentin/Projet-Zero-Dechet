@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Author</th>
                 <th>Created_at</th>
                 <th>actions</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td>{{ annonce.id }}</td>
                 <td>{{ annonce.title }}</td>
                 <td>{{ annonce.content }}</td>
+                <td>{{ annonce.author }}</td>
                 <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('annonces_show', {'id': annonce.id}) }}">show</a>

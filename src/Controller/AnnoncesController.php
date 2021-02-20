@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\AnnoncesType;
 use App\Repository\AnnoncesRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/annonces")
+ * @IsGranted("ROLE_USER")
  */
 class AnnoncesController extends AbstractController
 {
@@ -31,6 +33,11 @@ class AnnoncesController extends AbstractController
     public function new(Request $request): Response
     {
         $annonce = new Annonces();
+        $date = new \DateTime('NOW');
+        $date->format('d/m/Y');
+        $annonce->setCreatedAt($date);
+        $user = $this->getUser();
+        $annonce->setAuthor($user);
         $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 

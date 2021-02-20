@@ -32,21 +32,6 @@ class User implements UserInterface
      */
     private $email;
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
 
     /**
      * @ORM\Column(type="json")
@@ -63,6 +48,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="author")
      */
     private $annonces;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profile_pic;
 
     public function __construct()
     {
@@ -87,6 +77,21 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getEmail()
+    {
+        return (string) $this->email;
+    }
+
+    public function setEmail($email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
@@ -175,5 +180,17 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->username;
+    }
+
+    public function getProfilePic(): ?string
+    {
+        return $this->profile_pic;
+    }
+
+    public function setProfilePic(string $profile_pic): self
+    {
+        $this->profile_pic = $profile_pic;
+
+        return $this;
     }
 }
