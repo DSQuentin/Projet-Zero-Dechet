@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Annonces;
+use App\Entity\User;
 use App\Form\AnnoncesType;
 use App\Repository\AnnoncesRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +24,7 @@ class AnnoncesController extends AbstractController
     public function index(AnnoncesRepository $annoncesRepository): Response
     {
         return $this->render('annonces/index.html.twig', [
-            'annonces' => $annoncesRepository->findAll(),
+            'annonceuser' => $annoncesRepository->findBy(['author' => $this->getUser()->getId()])
         ]);
     }
 

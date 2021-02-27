@@ -1,23 +1,30 @@
-<!-- component -->
-<section class="bg-white py-8 w-full shadow-lg">
-    <div class="container mx-auto px-8">
-        <div class="flex justify-between text-sm">
-            <p>Site crée dans le cadre du projet de fin d'année d'IUT de la promo 2020/2021</p>
-            <div class="flex">
-                <a class="mx-2" href="https://gitlab.com/malomiquel/projet-zero-dechet">
-                    <img class="h-6" src="img/logo_gitlab.png" alt="gitlab">
-                </a>
-                <a class="mx-2" href="https://www.univ-orleans.fr/fr">
-                    <img class="h-6" src="img/logo_univ.png" alt="univ">
-                </a>
-                <a class="mx-2" href="https://www.univ-orleans.fr/fr/iut-orleans/formation/informatique">
-                    <img class="h-6" src="img/logo_iut.png" alt="iut">
-                </a>
+<div class="bg-white">
+    <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-8 lg:px-8">
+        <div class="xl:grid xl:grid-cols-3 xl:gap-4">
+            <div class="lg:flex lg:space-between xl:col-span-2">
+                <div>
+                    <p class="text-gray-500 text-base leading-6">
+                        Site crée dans le cadre du projet de fin d'année d'IUT de la promo 2020/2021
+                    </p>
+                    <p class="text-gray-500 text-sm leading-6">
+                        Crée par : Quentin DA SILVA, Malo MIQUEL, Dariusz NOWAKOWSKI, Cyprien FERRAND et Quentin FILLIETTE
+                    </p>
+                </div>
             </div>
-
-        </div>
-        <div class="text-xs">
-            <p>Crée par : Quentin DA SILVA, Malo MIQUEL, Dariusz NOWAKOWSKI, Cyprien FERRAND et Quentin FILLIETTE</p>
+            <div>
+                <div class="flex mt-4 xl:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <img class="h-8 w-auto" src="{{ absolute_url(asset('img/logo_iut.png'))}}" alt="iut">
+                    </a>
+                    <a href="#" class="ml-6 text-gray-400 hover:text-gray-500">
+                        <img class="h-8 w-auto" src="{{ absolute_url(asset('img/logo_univ.png'))}}" alt="univ">
+                    </a>
+                    <a href="#" class="ml-6 text-gray-400 hover:text-gray-500">
+                        <img class="h-8 w-auto" src="{{ absolute_url(asset('img/logo_gitlab.png'))}}" alt="gitlab">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>
+

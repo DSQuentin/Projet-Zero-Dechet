@@ -3,39 +3,69 @@
 {% block title %}Annonces index{% endblock %}
 
 {% block body %}
-    <h1>Annonces index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Author</th>
-                <th>Created_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for annonce in annonces %}
-            <tr>
-                <td>{{ annonce.id }}</td>
-                <td>{{ annonce.title }}</td>
-                <td>{{ annonce.content }}</td>
-                <td>{{ annonce.author }}</td>
-                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('annonces_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('annonces_edit', {'id': annonce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('annonces_new') }}">Create new</a>
+    <div class="ml-auto flex flex-col mt-4">
+        <h2 class="text-3xl leading-9 tracking-tight font-extrabold text-gray-900 sm:text-4xl sm:leading-10 ml-4">
+            Liste des annonces de {{ app.user.username }}
+        </h2>
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-4">
+            <div class="align-middle inline-block min-w-full shadow overflow-hidden">
+                <table class="min-w-full">
+                    <thead>
+                    <tr>
+                        <th class="px-12 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Titre
+                        </th>
+                        <th class="px-12 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Contenu
+                        </th>
+                        <th class="px-12 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Date de création
+                        </th>
+                        <th class="px-12 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Lieu
+                        </th>
+                        <th class="px-20 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                    {% for annonce in annonceuser %}
+                        <tr>
+                            <td class="px-12 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ annonce.title }}</div>
+                            </td>
+                            <td class="px-12 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ annonce.shortResumeContent }}</div>
+                            </td>
+                            <td class="px-12 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ annonce.createdAt | date('d-m-Y') }}</div>
+                            </td>
+                            <td class="px-12 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ annonce.ville }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+                                <div class="flex items-center justify-end">
+                                    <a href="{{ path('annonces_edit', {'id': annonce.id}) }}" class="mr-2 text-blue-500 hover:text-blue-600 hover:bg-gray-200 rounded-full px-4 py-2 focus:outline-none focus:underline">
+                                        Editer
+                                    </a>
+                                    <form method="post" action="{{ path('annonces_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette annonce ?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="flex mt-4 ml-4 mb-4">
+                    <a href="{{ path('annonces_new') }}" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                        Créer un nouvel article
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

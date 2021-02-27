@@ -29,6 +29,16 @@ class AnnoncesRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByAuthor($author)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.author = :name')
+            ->setParameter('name', $author)
+            ->orderBy('e.created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Annonces[] Returns an array of Annonces objects
     //  */

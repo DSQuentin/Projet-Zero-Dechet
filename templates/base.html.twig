@@ -54,7 +54,7 @@
                                     <button @click="open = !open"
                                             class="flex text-sm rounded-full text-white focus:outline-none focus:shadow-solid transition duration-150 ease-in-out">
                                         <img class="h-8 w-8 rounded-full"
-                                             src="{{ app.user.profilePic }}"
+                                             src="{{ absolute_url(asset(app.user.profilePic)) }}"
                                              alt="" />
                                     </button>
                                 </div>
@@ -101,7 +101,7 @@
                     <div class="flex items-center px-5">
                         <div class="flex-shrink-0">
                             <img class="h-10 w-10 rounded-full"
-                                 src="{{ app.user.profilePic }}"
+                                 src="{{ absolute_url(asset(app.user.profilePic)) }}"
                                  alt="" />
                         </div>
                         <div class="ml-3">
@@ -134,9 +134,10 @@
         </nav>
     </header>
 
-
+        <div class="mb-auto">
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
+        </div>
 
 
     {% include '_footer.html.twig' %}
