@@ -37,6 +37,12 @@ class Annonces
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Villes::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ville;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,5 +106,17 @@ class Annonces
     {
         $content = $this->getContent();
         return substr($content, 0, 50) . ' ...';
+    }
+
+    public function getVille(): ?Villes
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Villes $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
     }
 }

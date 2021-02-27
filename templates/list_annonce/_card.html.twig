@@ -1,20 +1,50 @@
-<div class="max-w-xs rounded overflow-hidden shadow-lg my-2">
-    <img class="w-full" src="https://tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
-    <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">{{ annonce.title }}</div>
-        <p class="text-grey-darker text-base">
-            {{ annonce.mediumResumeContent }}
-        </p>
+<div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+    <a href="{{ path('annonces_show', {'id' : annonce.id}) }}" class="flex-shrink-0">
+        <img class="h-48 w-full object-cover"
+             src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
+             alt="" />
+    </a>
+    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+        <div class="flex-1">
+            <a href="{{ path('annonces_show', {'id' : annonce.id}) }}" class="block">
+                <h3 class="mt-2 text-xl leading-7 font-semibold text-gray-900">
+                    {{ annonce.title}}
+                </h3>
+                <p class="mt-3 text-base leading-6 text-gray-500">
+                    {{ annonce.mediumResumeContent }}
+                </p>
+            </a>
+        </div>
+        <div class="mt-6 flex items-center justify-between">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <a href="#">
+                        <img class="h-10 w-10 rounded-full"
+                             src="{% if annonce.author.profilePic %}
+                                {{ annonce.author.profilePic }}
+                                {% else %}img/default_profile_pic.jpeg
+                                {% endif %}"
+                             alt=""/>
+                    </a>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
+                    <p>
+                        {% if annonce.author.username %}
+                            {{ annonce.author.username }}
+                        {% else %}Anonyme
+                        {% endif %}
+                    </p>
+                    </p>
+                    <div class="flex text-sm leading-5 text-gray-500">
+                        <p>Posté le {{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <img class="h-5 mr-2" src="http://cdn.onlinewebfonts.com/svg/img_228685.png" alt="">
+                <p class="text-sm leading-5 text-gray-500">{{ annonce.ville.name }} {{ annonce.ville.zip }}</p>
+            </div>
+        </div>
     </div>
-    <div class="flex justify-end">
-        <a href="{{ path('annonces_show', {'id': annonce.id}) }}">Voir plus</a>
-    </div>
-    {#
-    <div class="px-6 py-4">
-        <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">#photography</span>
-        <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">#travel</span>
-        <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">#winter</span>
-    </div>
-    #}
-
 </div>

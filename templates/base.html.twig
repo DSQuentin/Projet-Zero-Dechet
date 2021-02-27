@@ -2,53 +2,142 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="/output.css">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body class="bg-gray-200 h-screen flex flex-col">
+    <body class="bg-gray-100 h-screen flex flex-col">
     <!-- component -->
     <header>
-        <nav id="header" class="w-full z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400 mb-4">
-            <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
-                <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                    <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                        <title>menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-                    </svg>
-                </label>
-                <input class="hidden" type="checkbox" id="menu-toggle">
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
 
-                <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
-                    <nav>
-                        <ul class="md:flex items-center justify-between text-base pt-4 md:pt-0">
-                            <li class="inline-block text-gray-800 no-underline font-medium text-xl py-2 px-4 lg:-ml-2">Zéro Déchet</li>
-                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('home') }}">Accueil</a></li>
-                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('list_annonce') }}">Annonces</a></li>
-                            <li><a class="inline-block text-blue-600 no-underline hover:text-gray-800 font-medium text-lg py-2 px-4 lg:-ml-2" href="{{ path('annonces_index') }}">Gérer</a></li>
-                        </ul>
-                    </nav>
+        <nav x-data="{ open: true}" class="bg-white">
+            <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+                <div class="relative flex items-center justify-between h-16">
+                    <div class="flex items-center px-2 lg:px-0">
+                        <div class="flex-shrink-0">
+                            <img class="block lg:hidden h-8 w-auto" src="/img/logos/workflow-mark-on-dark.svg" alt="" />
+                            <img class="hidden lg:block h-8 w-auto" src="/img/logos/workflow-logo-on-dark.svg" alt="" />
+                        </div>
+                        <div class="hidden lg:block lg:ml-6">
+                            <div class="flex">
+                                <p class="ml-4 px-3 py-2 text-xl leading-5 font-medium text-gray-600">Zéro Déchet</p>
+                                <a href="/"
+                                   class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Accueil</a>
+                                <a href="{{ path('list_annonce') }}"
+                                   class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Annonces</a>
+                                <a href="{{ path('annonces_index') }}"
+                                   class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Mes annonces</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex lg:hidden">
+                        <button @click="open = !open"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out">
+                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <path :class="{'hidden': open, 'inline-flex': !open }" class="inline-flex"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 6h16M4 12h16M4 18h16" />
+                                <path :class="{'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    {% if app.user %}
+                    <div class="hidden lg:block lg:ml-4">
+                        <div class="flex items-center">
+
+                            <div @click.away="open = false" class="ml-4 relative flex-shrink-0" x-data="{ open: false }">
+                                <div class="flex">
+                                    <p class="ml-4 px-3 py-2 test-sm leading-5 font-medium text-blue-500">Bonjour {{ app.user.username }}</p>
+                                    <button @click="open = !open"
+                                            class="flex text-sm rounded-full text-white focus:outline-none focus:shadow-solid transition duration-150 ease-in-out">
+                                        <img class="h-8 w-8 rounded-full"
+                                             src="{{ app.user.profilePic }}"
+                                             alt="" />
+                                    </button>
+                                </div>
+                                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                                     x-transition:enter-start="transform opacity-0 scale-95"
+                                     x-transition:enter-end="transform opacity-100 scale-100"
+                                     x-transition:leave="transition ease-in duration-75"
+                                     x-transition:leave-start="transform opacity-100 scale-100"
+                                     x-transition:leave-end="transform opacity-0 scale-95"
+                                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                                    <div class="rounded-md bg-gray-100 shadow-xs">
+                                        <a href="{{ path('profile') }}"
+                                           class="block px-4 py-2 text-sm leading-5 text-blue-500 hover:bg-white focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                            Profile</a>
+                                        <a href="{{ path('app_logout') }}"
+                                           class="block px-4 py-2 text-sm leading-5 text-red-500 rounded hover:bg-red-500 hover:text-white">Déconnexion
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                        <div class="hidden lg:block lg:ml-4">
+                            <a href="{{ path('app_register') }}"
+                               class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">S'inscrire</a>
+                            <a href="{{ path('app_login') }}"
+                               class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white bg-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Se connecter</a>
+                        </div>
+                    {% endif %}
                 </div>
-
-                <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
-                    <div class="auth flex items-center w-full md:w-full">
-                        {% if app.user %}
-                            <a href="{{ path('profile') }}" class="bg-transparent text-blue-600 font-medium text-lg p-2 rounded border-gray-300 mr-4 hover:text-gray-800">Profile</a>
-                            <a href="{{ path('app_logout') }}" class="bg-red-500 text-gray-200  p-2 rounded  hover:bg-red-600 hover:text-white">Deconnexion</a>
-                        {% else %}
-                            <a href="{{ path('app_register') }}" class="bg-transparent text-blue-600 font-medium text-lg p-2 rounded border-gray-300 mr-4 hover:text-gray-800">S'inscrire</a>
-                            <a href="{{ path('app_login') }}" class="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-white">Se connecter</a>
-                        {% endif %}
+            </div>
+            <div :class="{'block': open, 'hidden': !open}" class="hidden lg:hidden">
+                <div class="px-2 pt-2 pb-3 border-t-2">
+                    <a href="{{ path('home') }}"
+                       class="block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-blue-300 transition duration-150 ease-in-out">Accueil</a>
+                    <a href="{{ path('list_annonce') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-blue-300 transition duration-150 ease-in-out">Annonces</a>
+                    <a href="{{ path('annonces_index') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-blue-300 transition duration-150 ease-in-out">Mes annonces</a>
+                </div>
+                {% if app.user %}
+                <div class="pt-4 pb-3 border-t border-gray-700">
+                    <div class="flex items-center px-5">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full"
+                                 src="{{ app.user.profilePic }}"
+                                 alt="" />
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-base font-medium leading-6 text-blue-500">{{ app.user.username }}</div>
+                            <div class="text-sm font-medium leading-5 text-gray-400">{{ app.user.email }}</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 px-2">
+                        <a href="#"
+                           class="block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-white hover:bg-blue-600 focus:outline-none focus:text-white focus:bg-blue-300 transition duration-150 ease-in-out">
+                            Profile</a>
+                        <a href="#"
+                           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-white hover:bg-blue-600 focus:outline-none focus:text-white focus:bg-blue-300 transition duration-150 ease-in-out">Settings</a>
+                        <a href="#"
+                           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-white hover:bg-red-600 focus:outline-none focus:text-white focus:bg-red-600 transition duration-150 ease-in-out">Déconnexion
+                            </a>
                     </div>
                 </div>
+                {% else %}
+                    <div class="pt-4 pb-3 border-t border-gray-700">
+                        <div class="px-2">
+                            <a href="{{ path('app_register') }}"
+                               class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">S'inscrire</a>
+                            <a href="{{ path('app_login') }}"
+                               class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Se connecter</a>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </nav>
     </header>
 
-        <div class="flex-grow">
+
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
-        </div>
+
 
     {% include '_footer.html.twig' %}
     </body>

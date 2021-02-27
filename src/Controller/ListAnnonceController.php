@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonces;
 use App\Repository\AnnoncesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListAnnonceController extends AbstractController
 {
     /**
-     * @Route("/listeannonce", name="list_annonce")
+     * @Route("/liste-annonce", name="list_annonce")
      */
     public function index(AnnoncesRepository $annoncesRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $data = $this->getDoctrine()->getRepository(Annonces::class)->findBy([],['created_at' => 'desc']);
         $pagination = $paginator->paginate(
-            $annoncesRepository->findAll(),
+            $data,
             $request->query->getInt('page', 1),
             12
         );

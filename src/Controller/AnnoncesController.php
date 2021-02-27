@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/annonces")
- * @IsGranted("ROLE_USER")
  */
 class AnnoncesController extends AbstractController
 {
@@ -29,6 +28,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/new", name="annonces_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -67,6 +67,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="annonces_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Annonces $annonce): Response
     {
@@ -87,6 +88,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/{id}", name="annonces_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, Annonces $annonce): Response
     {
