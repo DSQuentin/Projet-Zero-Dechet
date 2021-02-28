@@ -4,9 +4,17 @@
 
 {% block body %}
     <div class="ml-auto flex flex-col mt-8">
-        <h2 class="text-3xl leading-9 tracking-tight font-extrabold text-blue-500 sm:text-4xl sm:leading-10 ml-4">
+        <h2 class="text-3xl text-center leading-9 tracking-tight font-extrabold text-blue-500 sm:text-4xl sm:leading-10 ml-4">
             Liste des annonces de {{ app.user.username }}
         </h2>
+        {% if annonceuser is empty %}
+            <p class="text-xl mt-6 mx-8">Vous n'avez pas encore posté d'annonces.</p>
+            <div class="flex mt-4 ml-4 mb-8">
+                <a href="{{ path('annonces_new') }}" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                    Ajouter une nouvelle annonce
+                </a>
+            </div>
+        {% else %}
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-4">
             <div class="align-middle inline-block min-w-full shadow overflow-hidden">
                 <table class="min-w-full">
@@ -70,5 +78,6 @@
         <div class="flex justify-center mt-12">
             {{ knp_pagination_render(pagination, '_pagination.html.twig') }}
         </div>
+        {% endif %}
     </div>
 {% endblock %}
