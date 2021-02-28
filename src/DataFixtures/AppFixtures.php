@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Annonces;
+use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\Villes;
 use App\Repository\VillesRepository;
@@ -30,6 +31,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             ->setZip("00000");
         $manager->persist($villetest);
 
+
         for ($i = 0; $i<30; $i++){
             $author = new User();
             $author->setUsername("Auteur " . $i)
@@ -46,6 +48,20 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 ->setAuthor($author)
                 ->setVille($villetest);
             $manager->persist($annonce);
+
+            $comment = new Comment();
+            $comment->setAuthor($author)
+                ->setCreatedAt($today)
+                ->setContent('Commentaire de test ' . $i)
+                ->setAnnonces($annonce);
+            $manager->persist($comment);
+
+            $comment2 = new Comment();
+            $comment2->setAuthor($author)
+                ->setCreatedAt($today)
+                ->setContent('Commentaire 2 de test ' . $i)
+                ->setAnnonces($annonce);
+            $manager->persist($comment2);
 
         }
         $manager->flush();

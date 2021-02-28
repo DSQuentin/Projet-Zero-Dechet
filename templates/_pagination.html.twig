@@ -1,10 +1,10 @@
 {# tailwindcss Sliding pagination control implementation #}
 {% if pageCount > 1 %}
     <div class="inline-block flex">
-        <div class="mx-1 px-3 py-2 bg-gray-200 text-gray-500 rounded-lg">
+        <div class="mx-1 px-3 py-2 bg-white text-blue-500 rounded-lg">
             {% if first is defined and current != first %}
                 <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
-                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                    <span class="mx-1 px-3 py-2 text-blue-500 hover:bg-blue-400 hover:text-white rounded-lg">
                         Précédent
                     </span>
                 </a>
@@ -13,19 +13,19 @@
             {% for page in pagesInRange %}
                 {% if page != current %}
                     <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
-                        <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                        <span class="mx-1 px-3 py-2 text-blue-500 hover:bg-blue-400 hover:text-white rounded-lg">
                             {{ page }}
                         </span>
                     </a>
                 {% else %}
-                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold">{{ page }}</span>
+                    <span class="mx-1 px-3 py-2 text-blue-600 rounded-lg font-bold">{{ page }}</span>
                 {% endif %}
             {% endfor %}
 
             {% if next is defined %}
 
                 <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">
-                    <span class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                    <span class="mx-1 px-3 py-2 text-blue-500 hover:bg-blue-400 hover:text-white rounded-lg">
                         Suivant
                     </span>
                 </a>

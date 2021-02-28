@@ -1,8 +1,12 @@
 {% block datalist_widget %}
-    <input list="{{ id }}_list" {{ block('widget_attributes') }}{% if value is not empty %}value="{{ value }}"{% endif %}>
-    <datalist id="{{ id }}_list">
-        {% for choice in choices %}
-            <option value="{{ choice }}"></option>
-        {% endfor %}
-    </datalist>
+    <div class="form-group">
+        <input {{ block('widget_attributes') }} list="{{ form.vars.id }}_list" value="{{ form.vars.value }}" class="form-control" >
+        <datalist id="{{ form.vars.id }}_list">
+            {% for choice in choices %}
+                <option value="{{ choice.value }}">
+                    {{ choice.label }}
+                </option>
+            {% endfor %}
+        </datalist>
+    </div>
 {% endblock %}

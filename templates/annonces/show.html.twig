@@ -3,32 +3,54 @@
 {% block title %}Annonces{% endblock %}
 
 {% block body %}
-    <h1>Annonces</h1>
+    <div class="bg-white my-4 lg:mx-8 mx-2 rounded-lg p-4">
+        <div class="mx-6">
+            <h1 class="text-3xl font-bold text-blue-500 text-center mb-4">{{ annonce.title }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ annonce.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ annonce.content }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <p>{{ annonce.content }}</p>
+            <div class="flex mt-4 justify-between items-center">
+                <div class="flex">
+                    <div class="">
+                        <a href="#">
+                            <img class="h-10 w-10 rounded-full"
+                                 src="{% if annonce.author.profilePic %}
+                                {{ absolute_url(asset(annonce.author.profilePic)) }}
+                                {% else %}img/default_profile_pic.jpeg
+                                {% endif %}"
+                                 alt=""/>
+                        </a>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm leading-5 font-medium text-gray-900">
+                        <p>
+                            {% if annonce.author.username %}
+                                {{ annonce.author.username }}
+                            {% else %}Anonyme
+                            {% endif %}
+                        </p>
+                        </p>
+                        <div class="flex text-sm leading-5 text-gray-500">
+                            <p>le {{ annonce.createdAt|date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                </div>
 
-    <a href="{{ path('annonces_index') }}">back to list</a>
+                <div class="flex lg:justify-end mb-4 mt-4">
+                    <a href="{{ path('annonces_index') }}" class="ml-4 px-3 py-2 text-xl rounded-md leading-5 font-medium text-white bg-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Retour</a>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('annonces_edit', {'id': annonce.id}) }}">edit</a>
+    </div>
+    {% include 'annonces/_commentForm.html.twig' %}
+    <div class="my-6 lg:mx-8 mx-2 border-t-2 border-white-300">
+        <div class="flex items-center ml-4 my-2">
+            <img class="lg:h-24 h-16" src="https://images-na.ssl-images-amazon.com/images/I/31sW85ruBVL.png" alt="">
+            <p class="text-2xl">{{ annonce.comments|length }} Commentaire{% if (annonce.comments|length) > 1 %}s{% endif %}</p>
+        </div>
+        {% for comment in comments %}
+            {% include 'annonces/_comment.html.twig' %}
+        {% endfor %}
+    </div>
 
-    {{ include('annonces/_delete_form.html.twig') }}
 {% endblock %}

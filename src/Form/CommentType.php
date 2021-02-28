@@ -2,29 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Annonces;
-use App\Entity\Villes;
-use App\Repository\VillesRepository;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnnoncesType extends AbstractType
+class CommentType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
             ->add('content')
-            ->add('ville', DatalistType::class, ['class' => Villes::class, 'label' => 'Villes', 'choice_label' => 'name', 'choice_value' => 'name'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Annonces::class,
+            'data_class' => Comment::class,
         ]);
     }
 }
