@@ -102,6 +102,6 @@ class Villes
 
     public function __toString()
     {
-        return $this->name . $this->zip;
+        return $this->name . " (" . $this->zip . ")";
     }
 }

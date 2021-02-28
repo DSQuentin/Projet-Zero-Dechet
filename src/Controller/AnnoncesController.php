@@ -20,6 +20,7 @@ class AnnoncesController extends AbstractController
 {
     /**
      * @Route("/", name="annonces_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(AnnoncesRepository $annoncesRepository): Response
     {
