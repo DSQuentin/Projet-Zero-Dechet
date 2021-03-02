@@ -132,6 +132,10 @@ class AnnoncesController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $comments = $annonce->getComments();
+            foreach($comments as $comment){
+                $entityManager->remove($comment);
+            }
             $entityManager->remove($annonce);
             $entityManager->flush();
         }
