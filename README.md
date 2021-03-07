@@ -2,7 +2,7 @@
 Ce projet est un projet de site web de fin de deuxième année de notre DUT Informatique.
 
 ## Participants
-Pour ce projet, nous sommes en groupe de 5 composé de :  
+Pour ce projet, nous sommes en groupe de 5 composés de :  
 Malo Miquel (Chef de projet)  
 Quentin Da Silva  
 Dariusz Nowakowski  
@@ -30,12 +30,12 @@ Il faut maintenant créer la base de données et y injecter les données. Tout d
 Ensuite on peut donne un nom a notre base de données a la place de "database".
 Enfin, on exécute les commandes suivantes :
 * php bin/console doctrine:database:create
-* php bin/console doctrine:fixtures:load
 * php bin/console make:migration
+* php bin/console doctrine:fixtures:load
 * php bin/console doctrine:migrations:migrate
 
 Le projet est près d'être utilisé. Il n'y a plus qu'à exécuter la commande :
 * php -S localhost:8000 -t public
 
-Dans un navigateur, on accède au lien http://127.0.0.1:8000/ et voilà !
+Dans un navigateur, on accède au lien http://localhost:8000/ et voilà !
 
