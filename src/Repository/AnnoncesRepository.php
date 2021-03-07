@@ -29,6 +29,18 @@ class AnnoncesRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findThreeLastEntityOfUser($user)
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.created_at', 'DESC')
+            ->where('e.author = :author')
+            ->setParameter('author', $user)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function findByAuthor($author)
     {
         return $this->createQueryBuilder('e')

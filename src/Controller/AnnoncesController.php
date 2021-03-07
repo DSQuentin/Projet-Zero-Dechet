@@ -74,7 +74,7 @@ class AnnoncesController extends AbstractController
     /**
      * @Route("/{id}", name="annonces_show", methods={"GET","POST"})
      */
-    public function show(Annonces $annonce, CommentRepository $commentRepository, Request $request): Response
+    public function show(Annonces $annonce, Request $request): Response
     {
         $comments = $annonce->getComments();
 

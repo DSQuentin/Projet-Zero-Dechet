@@ -11,7 +11,7 @@
             <div class="flex mt-4 justify-between items-center">
                 <div class="flex">
                     <div class="">
-                        <a href="#">
+                        <a href="{{ path('show_profile', {'username': annonce.author.username}) }}">
                             <img class="h-10 w-10 rounded-full"
                                  src="{% if annonce.author.profilePic %}
                                 {{ absolute_url(asset(annonce.author.profilePic)) }}
@@ -21,13 +21,13 @@
                         </a>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm leading-5 font-medium text-gray-900">
-                        <p>
+                        <p class="text-lg leading-5 font-medium text-gray-900">
+                        <a href="{{ path('show_profile', {'username': annonce.author.username}) }}">
                             {% if annonce.author.username %}
                                 {{ annonce.author.username }}
                             {% else %}Anonyme
                             {% endif %}
-                        </p>
+                        </a>
                         </p>
                         <div class="flex text-sm leading-5 text-gray-500">
                             <p>le {{ annonce.createdAt|date('d/m/Y') }}</p>

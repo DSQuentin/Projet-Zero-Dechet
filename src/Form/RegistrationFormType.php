@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Villes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -51,6 +52,18 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
                 'label' => false
+            ])
+            ->add('ville', DatalistType::class, [
+                'class' => Villes::class,
+                'label' => false,
+                'choice_label' => 'name',
+                'choice_value' => 'name',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez indiquez une ville'
+                    ])
+                ],
+                'attr' => ['placeholder' => 'Sélectionner une ville']
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

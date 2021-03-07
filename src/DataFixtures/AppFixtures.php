@@ -38,7 +38,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 ->setEmail("auteur" . $i . "@mail.com")
                 ->setPassword("testtest")
                 ->setProfilePic('img/default_profile_pic.jpeg')
-                ->setRoles(["ROLE_USER"]);
+                ->setRoles(["ROLE_USER"])
+                ->setCreatedAt($today)
+                ->setVille($villetest);
             $manager->persist($author);
 
             $annonce = new Annonces();

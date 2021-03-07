@@ -20,6 +20,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $today = new \DateTime('NOW');
+        $today->format('d/m/Y');
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -31,6 +33,7 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles(['ROLE_USER']);
             $user->setProfilePic('img/default_profile_pic.jpeg');
+            $user->setCreatedAt($today);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

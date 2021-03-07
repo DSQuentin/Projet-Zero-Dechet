@@ -4,10 +4,55 @@
 
 {% block body %}
 
-{{ user.username }}
-    {{ user.email }}
-    <img src="{{ user.profilePic }}" alt="">
+    <section class="flex flex-col bg-white lg:mx-32 lg:my-6 mx-4 my-2 p-4 rounded-lg">
+        <div class="flex justify-between">
+            <div class="flex items-center">
+                <img src="{{ absolute_url(asset(user.profilePic)) }}" alt="profile_pic" class="lg:h-32 lg:w-32 h-12 w-12 rounded border-2 border-blue-400">
+                <div class="ml-4">
+                    <h1 class="lg:text-3xl text-2xl text-blue-400">Profile de <span class="font-bold">{{ user.username }}</span></h1>
+                </div>
+            </div>
+            <a href="{{ path('profile_edit', {'username' : user.username}) }}" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:border-blue-600 focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out mb-auto">Editer</a>
+        </div>
+        <div class="mt-4">
+            <h2 class="text-xl text-blue-400 border-b">Informations</h2>
+            <div class="flex mt-2 mb-2 justify-between mt-4">
+                <h3 class="text-blue-500">Email</h3>
+                <p>{{ user.email }}</p>
+            </div>
+            <div class="flex mb-2 justify-between">
+                <h3 class="text-blue-500">Inscrit le</h3>
+                <p>{{ user.createdAt|date('d/m/Y') }}</p>
+            </div>
+            <div class="flex mb-2 justify-between">
+                <h3 class="text-blue-500">Ville</h3>
+                <p>{{ user.ville }}</p>
+            </div>
+            <div class="flex mb-2 justify-between">
+                <h3 class="text-blue-500">Annonces</h3>
+                <p>{{ user.annonces|length }}</p>
+            </div>
+            <div class="flex justify-between">
+                <h3 class="text-blue-500">Commentaires</h3>
+                <p>{{ user.comments|length }}</p>
+            </div>
+        </div>
+        <div>
+            <h2 class="text-xl text-blue-400 border-b mt-6 mb-4">Dernières annonces de {{ user.username }}</h2>
+            {% if annonces is null %}
 
-    <a href="{{ path('profile_edit', {'username' : user.username}) }}">Modifier</a>
+            {% else %}
+
+                {% for annonce in annonces %}
+                    <div class="flex justify-between">
+                        <a href="{{ path('annonces_show', {'id': annonce.id}) }}" class="text-blue-500 hover:text-blue-600 mb-2">{{ annonce.title }}</a>
+                        <p>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+    </section>
 
 {% endblock %}

@@ -59,6 +59,17 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Villes::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ville;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -226,6 +237,30 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getVille(): ?Villes
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Villes $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

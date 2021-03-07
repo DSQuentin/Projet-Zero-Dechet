@@ -8,6 +8,7 @@ use App\Repository\VillesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class AnnoncesType extends AbstractType
 {
@@ -17,7 +18,12 @@ class AnnoncesType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('ville', DatalistType::class, ['class' => Villes::class, 'label' => 'Villes', 'choice_label' => 'name', 'choice_value' => 'name'])
+            ->add('ville', DatalistType::class, [
+                'class' => Villes::class,
+                'label' => 'Villes',
+                'choice_label' => 'name',
+                'choice_value' => 'name',
+            ])
         ;
     }
 
