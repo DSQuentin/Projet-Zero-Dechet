@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% form_theme form 'form_template.html.twig' %}
+<h3 class="text-blue-500 text-lg mb-2">Titre</h3>
+    {{ form_row(form.title) }}
+<h3 class="text-blue-500 text-lg mb-2">Contenu</h3>
+{{ form_row(form.content) }}
+<h3 class="text-blue-500 text-lg mb-2">Ville</h3>
+{{ form_row(form.ville) }}
+<h3 class="text-blue-500 text-lg mb-2">Image</h3>
+{{ form_row(form.picture) }}
+<div class="flex justify-between mx-4 mt-6">
+    <button class="bg-blue-400 px-3 py-1 rounded-lg text-white hover:bg-gray-200 hover:text-blue-400">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('annonces_index') }}" class="bg-gray-200 px-3 py-1 rounded-lg text-blue-500 hover:bg-blue-400 hover:text-white">Retour</a>
+</div>
 {{ form_end(form) }}

@@ -1,7 +1,7 @@
 <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
     <a href="{{ path('annonces_show', {'id' : annonce.id}) }}" class="flex-shrink-0">
         <img class="h-48 w-full object-cover"
-             src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
+             src="{{ annonce.picture }}"
              alt="" />
     </a>
     <div class="flex-1 bg-white p-6 flex flex-col justify-between">
@@ -18,7 +18,7 @@
         <div class="mt-6 flex items-center justify-between">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <a href="#">
+                    <a href="{{ path('show_profile', {'username': annonce.author.username}) }}">
                         <img class="h-10 w-10 rounded-full"
                              src="{% if annonce.author.profilePic %}
                                 {{ annonce.author.profilePic }}
@@ -29,12 +29,12 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm leading-5 font-medium text-gray-900">
-                    <p>
+                    <a href="{{ path('show_profile', {'username': annonce.author.username}) }}">
                         {% if annonce.author.username %}
                             {{ annonce.author.username }}
                         {% else %}Anonyme
                         {% endif %}
-                    </p>
+                    </a>
                     </p>
                     <div class="flex text-sm leading-5 text-gray-500">
                         <p>Posté le {{ annonce.createdAt|date('d/m/Y') }}</p>

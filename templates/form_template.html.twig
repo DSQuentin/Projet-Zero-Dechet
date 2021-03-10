@@ -6,7 +6,7 @@
     {%- endif -%}
     <input type="{{ type }}"
            class="appearance-none block w-full mb-2 px-3 py-2 border border-gray-300 rounded-md placeholder-gray-700 focus:outline-none
-           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black"
+           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black placeholder-opacity-70"
             {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {%- endblock form_widget_simple -%}
 
@@ -20,10 +20,16 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block textarea_widget -%}
+    <textarea class="appearance-none block w-full mb-2 px-3 py-2 border border-gray-300 rounded-md placeholder-gray-700 focus:outline-none
+           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black placeholder-opacity-70"
+            {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget -%}
+
 {% block datalist_widget %}
     <div class="form-group">
         <input {{ block('widget_attributes') }} list="{{ form.vars.id }}_list" value="{{ form.vars.value }}" class="appearance-none block w-full mb-2 px-3 py-2 border border-gray-300 rounded-md placeholder-gray-700 focus:outline-none
-           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black" >
+           focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 text-black placeholder-opacity-70" >
         <datalist id="{{ form.vars.id }}_list">
             {% for choice in choices %}
                 <option value="{{ choice.value }}">
@@ -33,3 +39,4 @@
         </datalist>
     </div>
 {% endblock %}
+

@@ -48,7 +48,8 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 ->setContent("Contenu de l'annonce numéro " . $i . " qui est un peu long quand meme pour faire des tests")
                 ->setCreatedAt($today)
                 ->setAuthor($author)
-                ->setVille($villetest);
+                ->setVille($villetest)
+                ->setPicture("http://placehold.it/350x350");
             $manager->persist($annonce);
 
             $comment = new Comment();

@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Annonces{% endblock %}
+{% block title %}Modifier une annnonce{% endblock %}
 
 {% block body %}
-    <h1>Edit Annonces</h1>
+<div class="bg-white mx-4 p-4 lg:px-8 lg:py-6 rounded-lg my-4 lg:mx-48 lg:mt-8">
+    <div class="border-b-2 mb-4">
+        <h1 class="mb-2 text-3xl leading-9 tracking-tight font-bold text-blue-500 sm:text-4xl sm:leading-10">
+            Modifier l'annonce : {{ annonce.title }}
+        </h1>
+    </div>
 
-    {{ include('annonces/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('annonces_index') }}">back to list</a>
-
-    {{ include('annonces/_delete_form.html.twig') }}
+    {{ include('annonces/_form.html.twig', {'button_label': 'Modifier'}) }}
+</div>
 {% endblock %}

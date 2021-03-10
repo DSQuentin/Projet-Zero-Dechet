@@ -46,7 +46,7 @@
                 {% for annonce in annonces %}
                     <div class="flex justify-between">
                         <a href="{{ path('annonces_show', {'id': annonce.id}) }}" class="text-blue-500 hover:text-blue-600 mb-2">{{ annonce.title }}</a>
-                        <p>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                        <p>le {{ annonce.createdAt|date('d/m/Y') }}</p>
                     </div>
                 {% endfor %}
 

@@ -14,38 +14,38 @@
             {{ form_start(registrationForm) }}
             {% form_theme registrationForm 'form_template.html.twig' %}
             <div class="bg-white shadow-md rounded px-28 pt-6 pb-8 mb-4">
-                <div class="text-center text-blue-700 font-bold text-2xl mb-2">
+                <div class="text-center text-blue-400 font-bold text-2xl mb-2">
                     <h1>Inscription</h1>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-blue-700 font-bold mb-2" for="username">
+                    <label class="block text-blue-400 mb-2" for="username">
                         Email
                     </label>
                     {{ form_row(registrationForm.email) }}
                 </div>
                 <div class="mb-4">
-                    <label class="block text-blue-700 font-bold mb-2" for="username">
+                    <label class="block text-blue-400 mb-2" for="username">
                         Nom d'utilisateur
                     </label>
                     {{ form_row(registrationForm.username) }}
                 </div>
                 <div class="mb-6">
-                    <label class="block text-blue-700 font-bold mb-2" for="password">
+                    <label class="block text-blue-400 mb-2" for="password">
                         Ville
                     </label>
                     {{ form_row(registrationForm.ville) }}
                 </div>
                 <div class="mb-6">
-                    <label class="block text-blue-700 font-bold mb-2" for="password">
+                    <label class="block text-blue-400 mb-2" for="password">
                         Mot de passe
                     </label>
                     {{ form_row(registrationForm.plainPassword) }}
                 </div>
                 <div class="flex items-center justify-between">
-                    <label class="text-gray-700 text-sm font-bold">
+                    <label class="text-gray-500 text-sm font-bold">
                         Accepter les termes :  {{ form_widget(registrationForm.agreeTerms) }}
                     </label>
-                    <button class="block text-md px-4  ml-2 py-2 rounded text-blue-700 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0" type="submit">
+                    <button class="inline-flex justify-center py-2 px-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:border-blue-600 focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out ml-2" type="submit">
                         S'inscrire
                     </button>
                 </div>
