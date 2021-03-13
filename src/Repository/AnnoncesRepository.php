@@ -64,7 +64,8 @@ class AnnoncesRepository extends ServiceEntityRepository
         $query = $this
             ->createQueryBuilder('a')
             ->select('v', 'a')
-            ->join('a.ville', 'v');
+            ->join('a.ville', 'v')
+            ->orderBy('a.created_at', 'DESC');
 
         if (!empty($searchData->q)){
             $query = $query

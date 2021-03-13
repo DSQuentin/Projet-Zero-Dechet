@@ -1,0 +1,14 @@
+<a{% for attr, value  in options | merge({classe: 'bg-red-500'}) %} {{ attr }}="{{ value }}"{% endfor %} style="color: #000;">
+<span class="pull-right">
+        {% if sorted %}
+            {% if direction == 'desc' %}
+                <i data-uk-icon="triangle-down"></i>
+            {% else %}
+                <i data-uk-icon="triangle-up"></i>
+            {% endif %}
+        {% else %}
+            <i></i>
+        {% endif %}
+    </span>
+{{ title }}
+</a>
