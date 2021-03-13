@@ -12,14 +12,17 @@
                                         Toutes les annonces
                                 </h2>
                         </div>
+                        <div>
+                                {% include 'list_annonce/_filter.html.twig' %}
+                        </div>
                         <div class="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
-                                {% for annonce in pagination %}
+                                {% for annonce in annonces %}
                                         {% include 'list_annonce/_card.html.twig' %}
                                 {% endfor %}
                         </div>
                 </div>
                 <div class="flex justify-center mt-12">
-                        {{ knp_pagination_render(pagination, '_pagination.html.twig') }}
+                        {{ knp_pagination_render(annonces, '_pagination.html.twig') }}
                 </div>
         </div>
 

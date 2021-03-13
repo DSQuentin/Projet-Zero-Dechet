@@ -16,6 +16,7 @@
         "fzaninotto/faker": "^1.9",
         "knplabs/knp-paginator-bundle": "^5.4",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "pugx/autocompleter-bundle": "^1.7",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.2.*",

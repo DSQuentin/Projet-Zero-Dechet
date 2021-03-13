@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Annonces;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Annonces|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +16,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AnnoncesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private PaginatorInterface $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Annonces::class);
+        $this->paginator = $paginator;
     }
 
     public function findThreeLastEntity()
@@ -51,32 +59,30 @@ class AnnoncesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // /**
-    //  * @return Annonces[] Returns an array of Annonces objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findSearch(SearchData $searchData)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this
+            ->createQueryBuilder('a')
+            ->select('v', 'a')
+            ->join('a.ville', 'v');
 
-    /*
-    public function findOneBySomeField($value): ?Annonces
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if (!empty($searchData->q)){
+            $query = $query
+                ->where('a.title LIKE :q')
+                ->setParameter('q', "%{$searchData->q}%");
+        }
+
+        if (!empty($searchData->villes)){
+            $query = $query
+                ->andWhere('v.id IN (:villes)')
+                ->setParameter('villes', $searchData->villes);
+        }
+
+        $query = $query->getQuery();
+        return $this->paginator->paginate(
+            $query,
+            $searchData->page,
+            12
+        );
     }
-    */
 }
