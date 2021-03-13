@@ -1,7 +1,7 @@
 <div class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
     <div class="flex flex-row justify-center mr-2">
         <a href="{{ path('show_profile', {'username': comment.author.username}) }}">
-            <img alt="avatar" width="48" height="48" class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4" src="{{ absolute_url(asset(annonce.author.profilePic)) }}">
+            <img alt="avatar" width="48" height="48" class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4" src="{{ asset(annonce.author.profilePic) }}">
         </a>
         <div>
             <a href="{{ path('show_profile', {'username': comment.author.username}) }}" class="text-blue-500 font-semibold text-lg text-center md:text-left ">{{ comment.author.username }}</a>

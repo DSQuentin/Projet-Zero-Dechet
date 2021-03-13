@@ -21,7 +21,7 @@
                     <a href="{{ path('show_profile', {'username': annonce.author.username}) }}">
                         <img class="h-10 w-10 rounded-full"
                              src="{% if annonce.author.profilePic %}
-                                {{ annonce.author.profilePic }}
+                                {{ asset(annonce.author.profilePic) }}
                                 {% else %}img/default_profile_pic.jpeg
                                 {% endif %}"
                              alt=""/>

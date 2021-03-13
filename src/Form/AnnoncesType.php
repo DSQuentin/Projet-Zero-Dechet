@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class AnnoncesType extends AbstractType
@@ -20,11 +21,28 @@ class AnnoncesType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Echange article contre ...']
+                'attr' => ['placeholder' => 'Echange article contre ...'],
+                'constraints' => [
+                    new Length([
+                        'min' => 5,
+                        'minMessage' => 'Le titre est trop court, veuillez entrer au moins 5 caractères',
+                        'max' => 100,
+                        'maxMessage' => 'Le titre est trop long, veuillez entrer moins de 100 caractères'
+
+                    ])
+                ]
             ])
             ->add('content', TextareaType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Bonjour, j\'échange ceci contre ...']
+                'attr' => ['placeholder' => 'Bonjour, j\'échange ceci contre ...'],
+                'constraints' => [
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Le contenu est trop court, veuillez entrer au moins 10 caractères',
+                        'max' => 10000,
+                        'maxMessage' => 'Le contenu est trop long, veuillez entrer moins de 1000 caractères'
+                    ])
+                ]
             ])
             ->add('ville', DatalistType::class, [
                 'class' => Villes::class,
