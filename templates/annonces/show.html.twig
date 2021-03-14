@@ -3,10 +3,10 @@
 {% block title %}{{ annonce.title }}{% endblock %}
 
 {% block body %}
-    <div class="bg-white my-4 lg:mx-16 mx-2 rounded-lg lg:p-4 py-2">
+    <div class="bg-white my-4 lg:mx-16 mx-2 rounded-lg lg:p-4 py-2 lg:h-96">
         <div class="mx-6">
             <div class="flex flex-col lg:block">
-                <img src="{{ annonce.picture }}" alt="" class="p-2 order-2 lg:float-left lg:h-96 mx-auto lg:mr-4 border-2 border-blue-400 rounded-md">
+                <img src="{{ annonce.picture }}" alt="" class="order-2 lg:float-left lg:h-80 mx-auto lg:mr-4 border-4 border-blue-400 rounded-md">
                     <h1 class="text-4xl font-bold text-blue-500 text-center mb-4 order-1 mb-4">{{ annonce.title }}</h1>
                     <p class="order-3 lg:mx-6 text-xl text-justify p-2">{{ annonce.content }}</p>
             </div>
@@ -49,7 +49,14 @@
             <img class="lg:h-24 h-16" src="https://images-na.ssl-images-amazon.com/images/I/31sW85ruBVL.png" alt="">
             <p class="text-2xl">{{ annonce.comments|length }} Commentaire{% if (annonce.comments|length) > 1 %}s{% endif %}</p>
         </div>
+        {% if app.user %}
         {% include 'annonces/_commentForm.html.twig' %}
+        {% else %}
+            <div class="mb-4 flex justify-center flex-col lg:flex-row items-center">
+                <p class="">Veuillez vous connecter pour commenter</p>
+                <a href="{{ path('app_login') }}" class="w-auto ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white bg-blue-500 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:text-blue-600 focus:bg-gray-100 transition duration-150 ease-in-out">Se connecter</a>
+            </div>
+        {% endif %}
         {% for comment in comments %}
             {% include 'annonces/_comment.html.twig' %}
         {% endfor %}
