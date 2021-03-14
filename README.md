@@ -31,8 +31,8 @@ Ensuite on peut donne un nom a notre base de données a la place de "database".
 Enfin, on exécute les commandes suivantes :
 * php bin/console doctrine:database:create
 * php bin/console make:migration
-* php bin/console doctrine:fixtures:load
 * php bin/console doctrine:migrations:migrate
+* php bin/console doctrine:fixtures:load
 
 Le projet est près d'être utilisé. Il n'y a plus qu'à exécuter la commande :
 * php -S localhost:8000 -t public
