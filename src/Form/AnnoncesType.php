@@ -39,7 +39,7 @@ class AnnoncesType extends AbstractType
                     new Length([
                         'min' => 10,
                         'minMessage' => 'Le contenu est trop court, veuillez entrer au moins 10 caractères',
-                        'max' => 10000,
+                        'max' => 500,
                         'maxMessage' => 'Le contenu est trop long, veuillez entrer moins de 1000 caractères'
                     ])
                 ]

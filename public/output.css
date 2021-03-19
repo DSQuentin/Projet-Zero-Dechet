@@ -1666,6 +1666,10 @@ video {
     align-items: flex-start;
   }
 
+  .md\:h-80 {
+    height: 20rem;
+  }
+
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -1732,10 +1736,6 @@ video {
 
   .lg\:h-32 {
     height: 8rem;
-  }
-
-  .lg\:h-80 {
-    height: 20rem;
   }
 
   .lg\:h-96 {
