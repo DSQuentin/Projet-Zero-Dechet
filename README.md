@@ -2,25 +2,14 @@
 Ce projet est un projet de site web de fin de deuxième année de notre DUT Informatique.
 
 ## Table des matières
-1. [Participants](#participants)
-    1.  [Lien GitLab](#gitlab)
-2.  [Objectif du site](#objectif)
-3.  [Comment démarrer le projet ?](#comment-demarrer)
+1.  [Objectif du site](#objectif)
+2.  [Comment démarrer le projet ?](#comment-demarrer)
     1.  [Installer Composer](#composer)
     2.  [Executer Composer](#composer-exec)
     3.  [Création de la base de donnée](#create-db)
     4.  [Lancement du projet](#launch)
 
-## Participants <a name="participants"></a>
-Pour ce projet, nous sommes en groupe de 5 composés de :  
-Malo Miquel (Chef de projet)  
-Quentin Da Silva  
-Dariusz Nowakowski  
-Quentin Filliette  
-Cyprien Ferrand <br>
 
-### Lien GitLab <a name="gitlab"></a>
-https://gitlab.com/malomiquel/projet-zero-dechet
 
 ## Objectif du site <a name="objectif"></a>
 Ce site à pour objectif de tester les compétences que nous avons acquises tout au long de notre
